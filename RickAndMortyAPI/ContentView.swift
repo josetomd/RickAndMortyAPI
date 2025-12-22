@@ -8,17 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var viewModel: CharacterViewModel
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            if let characters = viewModel.characters {
+                List(characters) { char in
+                    Text(char.name)
+                }
+            }
+        }
+        .task {
+            await viewModel.fetchCharacters()
         }
         .padding()
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(viewModel: CharacterViewModel())
 }
