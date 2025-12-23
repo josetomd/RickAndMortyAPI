@@ -18,7 +18,7 @@ struct ContentView: View {
                     ContentUnavailableView("Error", systemImage: "wifi.exclamationmark", description: Text(error))
                 } else {
                     List(viewModel.characters) { char in
-                        Text(char.name)
+                        CharacterCardView(character: char)
                     }
                 }
             }
