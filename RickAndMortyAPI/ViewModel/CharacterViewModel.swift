@@ -10,21 +10,12 @@ import Foundation
 class CharacterViewModel: ObservableObject {
     @Published var characters: [Character]?
     
+    let service: RMAPIService
+    
+    init(service: RMAPIService = DefaultAPIService()) {
+        self.service = service
+    }
     func fetchCharacters() async {
-        let url = URLRequest(url: .init(string: "https://rickandmortyapi.com/api/character")!)
-        
-        do {
-            let (jsonData, _) = try await URLSession.shared.data(for: url)
-            do {
-                let characterResult = try JSONDecoder().decode(CharacterResult.self, from: jsonData)
-                if characterResult.results.isEmpty == false {
-                    self.characters = characterResult.results
-                }
-            } catch {
-                print("error parsing json to swift object: \(error.localizedDescription)")
-            }
-        } catch {
-            print("Error fetching from url: \(error.localizedDescription)")
-        }   
+        self.characters = await service.fetchCharacters()
     }
 }
