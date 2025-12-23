@@ -10,17 +10,21 @@ import SwiftUI
 struct ContentView: View {
     @StateObject var viewModel: CharacterViewModel
     var body: some View {
-        VStack {
-            if let characters = viewModel.characters {
-                List(characters) { char in
-                    Text(char.name)
+        NavigationStack {
+            Group {
+                if viewModel.isLoading {
+                    ProgressView("Finding Characters...")
+                } else if let error = viewModel.errorMessage {
+                    ContentUnavailableView("Error", systemImage: "wifi.exclamationmark", description: Text(error))
+                } else {
+                    List(viewModel.characters) { char in
+                        Text(char.name)
+                    }
                 }
             }
+            .navigationTitle("Rick & Morty")
+            .task { await viewModel.fetchCharacters() }
         }
-        .task {
-            await viewModel.fetchCharacters()
-        }
-        .padding()
     }
 }
 

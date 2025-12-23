@@ -8,14 +8,26 @@
 import Foundation
 
 class CharacterViewModel: ObservableObject {
-    @Published var characters: [Character]?
+    @Published var characters: [Character] = []
+    @Published var errorMessage: String? = nil
+    @Published var isLoading: Bool = false
     
     let service: RMAPIService
     
     init(service: RMAPIService = DefaultAPIService()) {
         self.service = service
     }
+    
+    @MainActor
     func fetchCharacters() async {
-        self.characters = await service.fetchCharacters()
+        isLoading = true
+        errorMessage = nil
+        
+        do {
+            self.characters = try await service.fetchCharacters()
+        } catch {
+            self.errorMessage = error.localizedDescription
+        }
+        isLoading = false
     }
 }

@@ -8,5 +8,5 @@
 import Foundation
 
 protocol RMAPIService {
-     func fetchCharacters() async -> [Character]
+     func fetchCharacters() async throws -> [Character]
 }

@@ -8,22 +8,22 @@
 import Foundation
 
 struct DefaultAPIService: RMAPIService {
-    func fetchCharacters() async -> [Character] {
-        let url = URLRequest(url: .init(string: "https://rickandmortyapi.com/api/character")!)
+    func fetchCharacters() async throws -> [Character] {
+        guard let url = URL(string: "https://rickandmortyapi.com/api/character") else {
+            throw NetworkError.invalidURL
+        }
         
+        
+        let (jsonData, _) = try await URLSession.shared.data(from: url)
         do {
-            let (jsonData, _) = try await URLSession.shared.data(for: url)
-            do {
-                let characterResult = try JSONDecoder().decode(CharacterResult.self, from: jsonData)
-                if characterResult.results.isEmpty == false {
-                    return characterResult.results
-                }
-            } catch {
-                print("error parsing json to swift object: \(error.localizedDescription)")
+            let characterResult = try JSONDecoder().decode(CharacterResult.self, from: jsonData)
+            if characterResult.results.isEmpty == false {
+                return characterResult.results
             }
         } catch {
-            print("Error fetching from url: \(error.localizedDescription)")
+            throw NetworkError.decodingError(description: error.localizedDescription)
         }
+       
         return []
     }
 }
