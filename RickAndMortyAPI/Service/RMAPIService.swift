@@ -8,5 +8,6 @@
 import Foundation
 
 protocol RMAPIService {
-     func fetchCharacters() async throws -> [Character]
+    func fetchCharacters() async throws -> [Character]
+    func fetchEpisode(url: String) async throws -> Episode?
 }

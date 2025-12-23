@@ -13,7 +13,6 @@ struct DefaultAPIService: RMAPIService {
             throw NetworkError.invalidURL
         }
         
-        
         let (jsonData, _) = try await URLSession.shared.data(from: url)
         do {
             let characterResult = try JSONDecoder().decode(CharacterResult.self, from: jsonData)
@@ -25,5 +24,19 @@ struct DefaultAPIService: RMAPIService {
         }
        
         return []
+    }
+    
+    func fetchEpisode(url: String) async throws -> Episode? {
+        guard let url = URL(string: url) else {
+            throw NetworkError.invalidURL
+        }
+        
+        let (jsonData, _) = try await URLSession.shared.data(from: url)
+        do {
+            let episode = try JSONDecoder().decode(Episode.self, from: jsonData)
+            return episode
+        } catch {
+            throw NetworkError.decodingError(description: error.localizedDescription)
+        }
     }
 }

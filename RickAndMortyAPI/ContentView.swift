@@ -19,7 +19,10 @@ struct ContentView: View {
                 } else {
                     List(viewModel.characters) { char in
                         CharacterCardView(character: char)
+                            .listRowSeparator(.hidden)
                     }
+                    .listStyle(.plain)
+                    
                 }
             }
             .navigationTitle("Rick & Morty")
