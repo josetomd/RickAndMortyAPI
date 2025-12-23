@@ -31,3 +31,7 @@ struct ContentView: View {
 #Preview {
     ContentView(viewModel: CharacterViewModel(service: MockAPIService()))
 }
+
+#Preview {
+    ContentView(viewModel: CharacterViewModel(service: FailingAPIService()))
+}
