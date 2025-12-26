@@ -18,12 +18,18 @@ struct ContentView: View {
                     ContentUnavailableView("Error", systemImage: "wifi.exclamationmark", description: Text(error))
                 } else {
                     List(viewModel.characters) { char in
-                        NavigationLink {
-                            CharacterDetailView(viewModel: CharacterDetailViewModel(character: char))
-                        } label: {
+                        ZStack {
+                            NavigationLink {
+                                CharacterDetailView(viewModel: CharacterDetailViewModel(character: char))
+                            } label: {
+                                EmptyView()
+                            }
+                            .opacity(0)
+                            
                             CharacterCardView(character: char)
                                 .listRowSeparator(.hidden)
                         }
+                        
                     }
                     .listStyle(.plain)
                 }
