@@ -18,11 +18,14 @@ struct ContentView: View {
                     ContentUnavailableView("Error", systemImage: "wifi.exclamationmark", description: Text(error))
                 } else {
                     List(viewModel.characters) { char in
-                        CharacterCardView(character: char)
-                            .listRowSeparator(.hidden)
+                        NavigationLink {
+                            CharacterDetailView(viewModel: CharacterDetailViewModel(character: char))
+                        } label: {
+                            CharacterCardView(character: char)
+                                .listRowSeparator(.hidden)
+                        }
                     }
                     .listStyle(.plain)
-                    
                 }
             }
             .navigationTitle("Rick & Morty")

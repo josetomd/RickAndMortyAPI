@@ -14,7 +14,7 @@ class CharacterDetailViewModel: ObservableObject {
     @Published var episodes: [Episode] = []
     let service: RMAPIService
     
-    init(character: Character, service: RMAPIService) {
+    init(character: Character, service: RMAPIService = DefaultAPIService()) {
         self.character = character
         self.service = service
     }
