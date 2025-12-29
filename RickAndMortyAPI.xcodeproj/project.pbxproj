@@ -22,6 +22,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		EF09C8712F02ED2900C15102 /* Screenshots */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Screenshots;
+			sourceTree = "<group>";
+		};
 		EFF469DA2EF9959500B68A8A /* RickAndMortyAPI */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = RickAndMortyAPI;
@@ -55,6 +60,7 @@
 		EFF469CF2EF9959500B68A8A = {
 			isa = PBXGroup;
 			children = (
+				EF09C8712F02ED2900C15102 /* Screenshots */,
 				EFF469DA2EF9959500B68A8A /* RickAndMortyAPI */,
 				EFF46A102EFA2C9700B68A8A /* RickAndMortyAPITests */,
 				EFF469D92EF9959500B68A8A /* Products */,
@@ -86,6 +92,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				EF09C8712F02ED2900C15102 /* Screenshots */,
 				EFF469DA2EF9959500B68A8A /* RickAndMortyAPI */,
 			);
 			name = RickAndMortyAPI;
