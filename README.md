@@ -6,7 +6,7 @@
 
 ### 📺 App Demo
 
-<img src="https://github.com/user-attachments/assets/d623870a-999f-47fb-9b70-29ecabdcea54" width="250">
+https://github.com/user-attachments/assets/d623870a-999f-47fb-9b70-29ecabdcea54
 
 NOTE: Captured with Simulator running on Macbook Air M1 8GB
 
